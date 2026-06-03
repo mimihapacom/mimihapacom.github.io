@@ -1,0 +1,23 @@
+{
+  "short_name": "MimiHapa MEDICINE",
+  "name": "MimiHapa MEDICINE",
+  "description": "Official Medicine Website",
+  "icons": [
+    {
+      "src": "/app/icon.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/app/icon.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "https://www.mimihapaa.com",
+  "background_color": "#fff",
+  "display": "standalone",
+  "scope": "https://www.mimihapaa.com",
+  "theme_color": "#fff"
+
+}

@@ -1,0 +1,253 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,700,600' type='text/css' media='all' />
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Open Sans', sans-serif; background: #f0f4f0; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 40px 16px; }
+.wrapper { width: 100%; max-width: 780px; }
+.header { background: #2d7a3a; padding: 22px; text-align: center; border-radius: 12px 12px 0 0; }
+.header h1 { color: #fff; font-size: 30px; font-weight: 900; letter-spacing: 1px; }
+.body { background: #fff; border: 0.5px solid #dde8dd; padding: 40px 32px; }
+.body h2 { font-size: 20px; font-weight: 900; color: #1a1a1a; text-align: center; margin-bottom: 28px; font-family: Georgia, serif; }
+
+.file-list { border: 1px solid #ddd; border-radius: 6px; overflow: hidden; margin-bottom: 32px; }
+.file-row { display: flex; align-items: center; gap: 12px; padding: 11px 16px; background: #fff; border-bottom: 1px solid #e8e8e8; }
+.file-row:last-child { border-bottom: none; }
+.file-row:nth-child(even) { background: #f9f9f9; }
+.file-row.highlighted { background: #e8f0e8; }
+.folder-icon { flex-shrink: 0; width: 30px; height: 30px; }
+.folder-icon svg { width: 30px; height: 30px; display: block; }
+.file-name { flex: 1; font-size: 14px; color: #202124; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.file-row.highlighted .file-name { font-weight: 600; }
+
+.dl-box { border: 0.5px solid #dde8dd; border-radius: 10px; padding: 28px 32px; text-align: center; background: #f5faf5; }
+.dl-btn { display: inline-block; background: #2d7a3a; color: #fff; padding: 14px 48px; border-radius: 8px; font-size: 20px; font-family: Georgia, serif; font-weight: 900; text-decoration: none; cursor: pointer; border: none; transition: background 0.2s; }
+.dl-btn:hover { background: #235f2d; }
+
+.footer { background: #2d7a3a; padding: 14px; text-align: center; border-radius: 0 0 12px 12px; }
+.footer p { color: rgba(255,255,255,0.85); font-family: Georgia, serif; font-size: 16px; }
+.footer span { color: #fff; font-weight: 900; }
+
+/* ── MODAL ── */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  z-index: 999;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.modal-overlay.open { display: flex; }
+.modal {
+  background: #fff;
+  border-radius: 14px;
+  width: 100%;
+  max-width: 420px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+  animation: popIn 0.22s ease;
+}
+@keyframes popIn {
+  from { transform: scale(0.85); opacity: 0; }
+  to   { transform: scale(1);    opacity: 1; }
+}
+.modal-header {
+  background: #2d7a3a;
+  padding: 18px 22px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.modal-header h3 { color: #fff; font-size: 17px; font-weight: 900; font-family: Georgia, serif; }
+.modal-close { background: none; border: none; color: #fff; font-size: 22px; cursor: pointer; line-height: 1; }
+
+.modal-body { padding: 22px 22px 10px; }
+.price-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 13px 0;
+  border-bottom: 1px solid #eee;
+  gap: 12px;
+}
+.price-row:last-child { border-bottom: none; }
+.price-label { font-size: 14px; color: #222; font-weight: 600; flex: 1; }
+.price-amount {
+  background: #2d7a3a;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 5px 12px;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+
+.modal-footer { padding: 18px 22px 22px; text-align: center; }
+.wa-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: #25D366;
+  color: #fff;
+  padding: 13px 32px;
+  border-radius: 8px;
+  font-size: 17px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background 0.2s;
+  font-family: 'Open Sans', sans-serif;
+}
+.wa-btn:hover { background: #1ebe5d; }
+.wa-btn svg { width: 22px; height: 22px; fill: #fff; flex-shrink: 0; }
+</style>
+</head>
+<body>
+<div class="wrapper">
+  <div class="header">
+    <h1>MimiHapa MEDICINE</h1>
+  </div>
+  <div class="body">
+    <h2>CLINICAL MEDICINE NTA LEVEL 4</h2>
+
+    <div class="file-list">
+      <div class="file-row">
+        <div class="folder-icon">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M2 6C2 4.9 2.9 4 4 4H9L11 6H20C21.1 6 22 6.9 22 8V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6Z" fill="#F6AE2D"/><path d="M2 9H22V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V9Z" fill="#F8C355"/></svg>
+        </div>
+        <span class="file-name">Human Anatomy</span>
+      </div>
+      <div class="file-row">
+        <div class="folder-icon">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M2 6C2 4.9 2.9 4 4 4H9L11 6H20C21.1 6 22 6.9 22 8V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6Z" fill="#F6AE2D"/><path d="M2 9H22V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V9Z" fill="#F8C355"/></svg>
+        </div>
+        <span class="file-name">Human Physiology</span>
+      </div>
+      <div class="file-row">
+        <div class="folder-icon">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M2 6C2 4.9 2.9 4 4 4H9L11 6H20C21.1 6 22 6.9 22 8V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6Z" fill="#F6AE2D"/><path d="M2 9H22V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V9Z" fill="#F8C355"/></svg>
+        </div>
+        <span class="file-name">Microbiology, Parasitology & Entomology</span>
+      </div>
+      <div class="file-row">
+        <div class="folder-icon">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M2 6C2 4.9 2.9 4 4 4H9L11 6H20C21.1 6 22 6.9 22 8V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6Z" fill="#F6AE2D"/><path d="M2 9H22V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V9Z" fill="#F8C355"/></svg>
+        </div>
+        <span class="file-name">Epidermiology & Biostatics</span>
+      </div>
+      <div class="file-row">
+        <div class="folder-icon">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M2 6C2 4.9 2.9 4 4 4H9L11 6H20C21.1 6 22 6.9 22 8V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6Z" fill="#F6AE2D"/><path d="M2 9H22V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V9Z" fill="#F8C355"/></svg>
+        </div>
+        <span class="file-name">Medical Ethics</span>
+      </div>
+            <div class="file-row">
+        <div class="folder-icon">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M2 6C2 4.9 2.9 4 4 4H9L11 6H20C21.1 6 22 6.9 22 8V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6Z" fill="#F6AE2D"/><path d="M2 9H22V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V9Z" fill="#F8C355"/></svg>
+        </div>
+        <span class="file-name">Communication Skills & Customer Care</span>
+      </div>
+            <div class="file-row">
+        <div class="folder-icon">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M2 6C2 4.9 2.9 4 4 4H9L11 6H20C21.1 6 22 6.9 22 8V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6Z" fill="#F6AE2D"/><path d="M2 9H22V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V9Z" fill="#F8C355"/></svg>
+        </div>
+        <span class="file-name">Environmental Health</span>
+      </div>
+            <div class="file-row">
+        <div class="folder-icon">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M2 6C2 4.9 2.9 4 4 4H9L11 6H20C21.1 6 22 6.9 22 8V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6Z" fill="#F6AE2D"/><path d="M2 9H22V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V9Z" fill="#F8C355"/></svg>
+        </div>
+        <span class="file-name">Pathology</span>
+      </div>
+            <div class="file-row">
+        <div class="folder-icon">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M2 6C2 4.9 2.9 4 4 4H9L11 6H20C21.1 6 22 6.9 22 8V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6Z" fill="#F6AE2D"/><path d="M2 9H22V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V9Z" fill="#F8C355"/></svg>
+        </div>
+        <span class="file-name">Clinical Skills</span>
+      </div>
+            <div class="file-row">
+        <div class="folder-icon">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M2 6C2 4.9 2.9 4 4 4H9L11 6H20C21.1 6 22 6.9 22 8V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6Z" fill="#F6AE2D"/><path d="M2 9H22V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V9Z" fill="#F8C355"/></svg>
+        </div>
+        <span class="file-name">Clinical Laboratory</span>
+      </div>
+            <div class="file-row">
+        <div class="folder-icon">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M2 6C2 4.9 2.9 4 4 4H9L11 6H20C21.1 6 22 6.9 22 8V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6Z" fill="#F6AE2D"/><path d="M2 9H22V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V9Z" fill="#F8C355"/></svg>
+        </div>
+        <span class="file-name">Basic Patient Care</span>
+      </div>
+            <div class="file-row">
+        <div class="folder-icon">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M2 6C2 4.9 2.9 4 4 4H9L11 6H20C21.1 6 22 6.9 22 8V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6Z" fill="#F6AE2D"/><path d="M2 9H22V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V9Z" fill="#F8C355"/></svg>
+        </div>
+        <span class="file-name">Clinical Nutrition</span>
+      </div>
+            <div class="file-row">
+        <div class="folder-icon">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M2 6C2 4.9 2.9 4 4 4H9L11 6H20C21.1 6 22 6.9 22 8V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6Z" fill="#F6AE2D"/><path d="M2 9H22V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V9Z" fill="#F8C355"/></svg>
+        </div>
+        <span class="file-name">Medical Ethics</span>
+      </div>
+    </div>
+
+    <div class="dl-box">
+      <button class="dl-btn" onclick="document.getElementById('priceModal').classList.add('open')">Download Now!</button>
+    </div>
+  </div>
+  <div class="footer">
+    <p>Copyright &copy; 2026 | <span>MimiHapa MEDICINE</span></p>
+  </div>
+</div>
+
+<!-- PRICE MODAL -->
+<div class="modal-overlay" id="priceModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3>💰 Gharama Za Materials</h3>
+      <button class="modal-close" onclick="document.getElementById('priceModal').classList.remove('open')">&times;</button>
+    </div>
+    <div class="modal-body">
+      <div class="price-row">
+        <span class="price-label">📚 Notes Za Wizara + Past Papers</span>
+        <span class="price-amount">5,000/=</span>
+      </div>
+      <div class="price-row">
+        <span class="price-label">📚 Notes Za Wizara (Masomo Yote) Tu</span>
+        <span class="price-amount">4,000/=</span>
+      </div>
+            <div class="price-row">
+        <span class="price-label">📝 NACTVET Past Papers</span>
+        <span class="price-amount">5,000/=</span>
+      </div>
+      <div class="price-row">
+        <span class="price-label">📝 Past Papers (Masomo Yote) Tu</span>
+        <span class="price-amount">4,000/=</span>
+      </div>
+      <div class="price-row">
+        <span class="price-label">📖 Notes Au Past Paper (Somo 1)</span>
+        <span class="price-amount">2,000/=</span>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <a class="wa-btn" href="https://wa.me/255698697967" target="_blank">
+        <!-- WhatsApp icon -->
+        Click Here Kama Upo Tayari Kulipia
+      </a>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Close modal when clicking outside
+  document.getElementById('priceModal').addEventListener('click', function(e) {
+    if (e.target === this) this.classList.remove('open');
+  });
+</script>
+</body>
+</html>

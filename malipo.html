@@ -1,0 +1,404 @@
+
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:#fff;color:#111;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;overflow-x:hidden;-webkit-text-size-adjust:100%}
+.topnav{background:#fff;border-bottom:2px solid #C8102E;padding:.75rem 1.2rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+.logo{font-family:Georgia,serif;font-size:1.05rem;font-weight:700;color:#111}
+.logo span{color:#C8102E}
+.nav-wa{background:#25D366;color:#fff;border:none;border-radius:8px;padding:.42rem .85rem;font-size:.75rem;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:.3rem;white-space:nowrap;-webkit-tap-highlight-color:transparent}
+
+/* SLIDESHOW */
+#slideshow{width:100%;height:100svh;max-height:620px;position:relative;overflow:hidden;background:#000}
+#photo-track{display:flex;height:100%;transition:transform .65s cubic-bezier(.4,0,.2,1);will-change:transform}
+.photo-slide{flex:0 0 100%;height:100%;position:relative;overflow:hidden}
+.photo-slide img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block;-webkit-user-drag:none;user-select:none}
+
+/* dark gradient at bottom for text legibility */
+#slideshow::after{content:'';position:absolute;bottom:0;left:0;right:0;height:60%;background:linear-gradient(to top,rgba(0,0,0,.88) 0%,rgba(0,0,0,.3) 60%,transparent 100%);pointer-events:none;z-index:2}
+
+/* top label */
+.slide-label{position:absolute;top:0;left:0;right:0;padding:.7rem 1rem;background:linear-gradient(to bottom,rgba(0,0,0,.55),transparent);z-index:5;display:flex;align-items:center;justify-content:space-between}
+.slide-brand{font-family:Georgia,serif;font-size:.88rem;font-weight:700;color:#fff;letter-spacing:.03em}
+.slide-brand span{color:#FFD966}
+.slide-counter{font-size:.7rem;color:rgba(255,255,255,.7);font-weight:600;letter-spacing:.08em}
+
+/* dots */
+#photo-dots{position:absolute;bottom:140px;left:50%;transform:translateX(-50%);display:flex;gap:5px;z-index:11}
+@media(max-height:500px){#photo-dots{bottom:110px}}
+.pdot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.4);transition:all .3s;border:none;padding:0;cursor:pointer}
+.pdot.on{background:#fff;width:20px;border-radius:3px}
+
+/* CTA overlay */
+#cta-overlay{position:absolute;bottom:0;left:0;right:0;z-index:10;padding:1.2rem 1.2rem 1.8rem;display:none;flex-direction:column;align-items:center;text-align:center;gap:.75rem}
+#cta-overlay.show{display:flex}
+.cta-tag{background:rgba(200,16,46,.9);color:#fff;font-size:.62rem;font-weight:700;letter-spacing:.12em;padding:.25rem .75rem;border-radius:20px;text-transform:uppercase}
+.cta-overlay-text{color:#fff;font-family:Georgia,serif;font-size:clamp(1.15rem,4.5vw,1.5rem);font-weight:700;line-height:1.25;text-shadow:0 2px 10px rgba(0,0,0,.6)}
+.cta-overlay-text span{color:#FFD966}
+.cta-overlay-sub{color:rgba(255,255,255,.82);font-size:.78rem;text-shadow:0 1px 4px rgba(0,0,0,.5);max-width:280px}
+.cta-overlay-btn{background:#C8102E;color:#fff;border:none;border-radius:14px;padding:.9rem 0;font-size:.95rem;font-weight:700;cursor:pointer;box-shadow:0 4px 22px rgba(200,16,46,.5);width:100%;max-width:300px;-webkit-tap-highlight-color:transparent;transition:transform .15s}
+.cta-overlay-btn:active{transform:scale(.97)}
+
+/* MAIN */
+#main-content{display:none;background:#fff}
+.hero-band{background:#C8102E;color:#fff;padding:1.8rem 1.2rem;text-align:center}
+.hero-band h1{font-family:Georgia,serif;font-size:clamp(1.3rem,5vw,2rem);font-weight:700;margin-bottom:.3rem}
+.hero-band h1 em{font-style:normal;color:#FFD966}
+.hero-band p{font-size:.8rem;opacity:.9;max-width:460px;margin:0 auto;line-height:1.65}
+
+.section{padding:1.6rem 1rem;max-width:1100px;margin:0 auto}
+.sec-head{font-family:Georgia,serif;font-size:1.15rem;font-weight:700;color:#111;margin-bottom:.2rem}
+.sec-sub{font-size:.78rem;color:#666;margin-bottom:1.1rem;line-height:1.6}
+
+.price-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:.75rem}
+.p-card{background:#fff;border:1.5px solid #eee;border-radius:13px;padding:1rem;position:relative}
+.p-card.featured{border-color:#C8102E;box-shadow:0 4px 16px rgba(200,16,46,.12)}
+.p-tag{display:inline-block;font-size:.58rem;font-weight:700;letter-spacing:.09em;padding:.16rem .5rem;border-radius:20px;margin-bottom:.5rem;text-transform:uppercase}
+.tag-best{background:#C8102E;color:#fff}
+.tag-combo{background:#fff0f2;color:#C8102E;border:1px solid #fcc}
+.tag-notes{background:#f0fdf4;color:#16a34a;border:1px solid #bbf7d0}
+.tag-papers{background:#eff6ff;color:#2563eb;border:1px solid #bfdbfe}
+.tag-nacte{background:#fffbeb;color:#b45309;border:1px solid #fde68a}
+.tag-special{background:#f5f3ff;color:#7c3aed;border:1px solid #ddd6fe}
+.p-name{font-weight:700;font-size:.88rem;color:#111;margin-bottom:.15rem}
+.p-desc{font-size:.7rem;color:#777;margin-bottom:.7rem;line-height:1.5}
+.p-price{font-family:Georgia,serif;font-size:1.75rem;font-weight:700;color:#111}
+.p-price sup{font-size:.72rem;color:#C8102E;vertical-align:top;margin-top:.38rem;display:inline-block}
+.p-price span{font-size:.75rem;color:#999;font-weight:400}
+.p-divider{height:1px;background:#f0f0f0;margin:.7rem 0}
+.p-wa-btn{display:flex;align-items:center;justify-content:center;gap:.35rem;width:100%;padding:.62rem;background:#25D366;color:#fff;border:none;border-radius:9px;font-weight:700;font-size:.78rem;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.p-wa-btn:active{background:#1da853}
+.p-best-badge{position:absolute;top:-1px;right:1rem;background:#C8102E;color:#fff;font-size:.57rem;font-weight:700;padding:.16rem .55rem;border-radius:0 0 8px 8px;letter-spacing:.07em}
+
+.order-section{background:#fafafa;border-top:2px solid #f0f0f0;padding:1.8rem 1rem}
+.order-inner{max-width:620px;margin:0 auto}
+.order-inner h2{font-family:Georgia,serif;font-size:1.2rem;font-weight:700;color:#111;margin-bottom:.2rem}
+.order-inner>p{font-size:.78rem;color:#666;margin-bottom:1.2rem;line-height:1.6}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:.65rem;margin-bottom:.65rem}
+@media(max-width:460px){.form-row{grid-template-columns:1fr}}
+.form-group{display:flex;flex-direction:column;gap:.28rem}
+.form-group label{font-size:.72rem;font-weight:600;color:#444}
+.form-group select,.form-group input{padding:.65rem .82rem;border:1.5px solid #e0e0e0;border-radius:9px;font-size:.82rem;color:#111;background:#fff;outline:none;-webkit-appearance:none;appearance:none;width:100%;transition:border-color .2s}
+.form-group select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23C8102E' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right .75rem center;padding-right:2rem}
+.form-group select:focus,.form-group input:focus{border-color:#C8102E}
+.form-group select option{background:#fff;color:#111}
+.sem-row{display:flex;gap:.45rem;flex-wrap:wrap;margin-bottom:1rem}
+.sem-chip{padding:.45rem .8rem;border:1.5px solid #e0e0e0;border-radius:8px;cursor:pointer;background:#fff;font-size:.78rem;color:#555;user-select:none;-webkit-tap-highlight-color:transparent;transition:all .15s}
+.sem-chip.sel{border-color:#C8102E;background:#fff5f5;color:#C8102E;font-weight:700}
+.msg-box{background:#fff;border:1.5px dashed #e0e0e0;border-radius:10px;padding:.85rem;font-size:.76rem;color:#999;min-height:80px;line-height:1.85;margin-bottom:1rem;transition:border-color .3s}
+.msg-box.ready{border-color:#C8102E;border-style:solid;color:#444}
+.msg-box strong{color:#C8102E}
+.send-btn{display:flex;align-items:center;justify-content:center;gap:.5rem;width:100%;padding:.95rem;background:#25D366;color:#fff;border:none;border-radius:11px;font-weight:700;font-size:.9rem;cursor:pointer;box-shadow:0 4px 14px rgba(37,211,102,.25);-webkit-tap-highlight-color:transparent}
+.send-btn:active{background:#1da853}
+
+footer{background:#111;color:#666;text-align:center;padding:1.8rem 1rem;font-size:.76rem}
+footer .fl{font-family:Georgia,serif;font-size:1rem;color:#fff;margin-bottom:.2rem}
+footer .fl span{color:#C8102E}
+
+.fwa{position:fixed;bottom:1.2rem;right:1.2rem;width:50px;height:50px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.3rem;text-decoration:none;z-index:999;box-shadow:0 4px 14px rgba(37,211,102,.4);-webkit-tap-highlight-color:transparent}
+
+#notif-area{position:fixed;bottom:1rem;left:.8rem;z-index:9999;display:flex;flex-direction:column-reverse;gap:.4rem;max-width:min(260px,calc(100vw - 1.6rem));pointer-events:none}
+.notif-toast{background:#fff;border:1.5px solid #eee;border-left:4px solid #C8102E;border-radius:10px;padding:.6rem .8rem;font-size:.7rem;color:#333;box-shadow:0 4px 14px rgba(0,0,0,.11);display:flex;align-items:flex-start;gap:.45rem;animation:nIn .35s ease;line-height:1.4}
+.nt-icon{font-size:.95rem;flex-shrink:0;line-height:1.3}
+.nt-name{font-weight:700;color:#111}
+.nt-amount{color:#C8102E;font-weight:700}
+.nt-time{color:#aaa;font-size:.6rem;margin-top:.1rem}
+@keyframes nIn{from{opacity:0;transform:translateX(-14px)}to{opacity:1;transform:translateX(0)}}
+@keyframes nOut{from{opacity:1;transform:translateX(0)}to{opacity:0;transform:translateX(-14px)}}
+.notif-toast.out{animation:nOut .35s ease forwards}
+</style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<div id="notif-area"></div>
+
+<div class="topnav">
+  <div class="logo"><span>MimiHapa</span> MEDICINE</div>
+  <button class="nav-wa" onclick="window.open('https://wa.me/255698697967')">💬 WhatsApp</button>
+</div>
+
+<div id="slideshow">
+  <!-- top label -->
+  <div class="slide-label">
+    <div class="slide-brand"><span>MimiHapa</span> MEDICINE</div>
+    <div class="slide-counter" id="slide-counter">1 / 10</div>
+  </div>
+
+  <div id="photo-track">
+    <div class="photo-slide"><img src="https://www.mimihapaa.com/prof/01.jpeg" alt="Mtumiaji 1 aliyepata materials" loading="eager" onerror="this.style.background='#1a0505';this.alt='Picha 1'"></div>
+    <div class="photo-slide"><img src="https://www.mimihapaa.com/prof/02.jpeg" alt="Mtumiaji 2 aliyepata materials" loading="lazy" onerror="this.style.background='#1a0505'"></div>
+    <div class="photo-slide"><img src="https://www.mimihapaa.com/prof/03.jpeg" alt="Mtumiaji 3 aliyepata materials" loading="lazy" onerror="this.style.background='#1a0505'"></div>
+    <div class="photo-slide"><img src="https://www.mimihapaa.com/prof/04.jpeg" alt="Mtumiaji 4 aliyepata materials" loading="lazy" onerror="this.style.background='#1a0505'"></div>
+    <div class="photo-slide"><img src="https://www.mimihapaa.com/prof/05.jpeg" alt="Mtumiaji 5 aliyepata materials" loading="lazy" onerror="this.style.background='#1a0505'"></div>
+    <div class="photo-slide"><img src="https://www.mimihapaa.com/prof/06.jpeg" alt="Mtumiaji 6 aliyepata materials" loading="lazy" onerror="this.style.background='#1a0505'"></div>
+    <div class="photo-slide"><img src="https://www.mimihapaa.com/prof/07.jpeg" alt="Mtumiaji 7 aliyepata materials" loading="lazy" onerror="this.style.background='#1a0505'"></div>
+    <div class="photo-slide"><img src="https://www.mimihapaa.com/prof/08.jpeg" alt="Mtumiaji 8 aliyepata materials" loading="lazy" onerror="this.style.background='#1a0505'"></div>
+    <div class="photo-slide"><img src="https://www.mimihapaa.com/prof/09.jpeg" alt="Mtumiaji 9 aliyepata materials" loading="lazy" onerror="this.style.background='#1a0505'"></div>
+    <div class="photo-slide"><img src="https://www.mimihapaa.com/prof/10.jpeg" alt="Mtumiaji 10 aliyepata materials" loading="lazy" onerror="this.style.background='#1a0505'"></div>
+  </div>
+
+  <div id="photo-dots">
+    <button class="pdot on"></button><button class="pdot"></button><button class="pdot"></button><button class="pdot"></button><button class="pdot"></button>
+    <button class="pdot"></button><button class="pdot"></button><button class="pdot"></button><button class="pdot"></button><button class="pdot"></button>
+  </div>
+
+  <div id="cta-overlay">
+    <div class="cta-tag">✚ MATERIALS ZA TIBA TANZANIA</div>
+    <div class="cta-overlay-text">Nawe pia unahitaji <span>materials?</span></div>
+    <div class="cta-overlay-sub">Notes Za Wizara, Past Papers, NACTE & zaidi — bei nafuu kabisa!</div>
+    <button class="cta-overlay-btn" onclick="showContent()">Ndiyo, Ninataka Materials! →</button>
+  </div>
+</div>
+
+<div id="main-content">
+  <div class="hero-band">
+    <h1>Gharama za <em>Materials</em></h1>
+    <p>Bei nafuu kwa wanafunzi wote wa tiba Tanzania. Lipia M-Pesa, Tigo Pesa, Airtel au Halopesa.</p>
+  </div>
+
+  <div class="section">
+    <div class="sec-head">📦 Packages Zetu</div>
+    <div class="sec-sub">Chagua package inayokufaa — lipia mara moja, pata materials haraka!</div>
+    <div class="price-grid">
+      <div class="p-card featured">
+        <div class="p-best-badge">MAARUFU SANA</div>
+        <div class="p-tag tag-best">COMBO BORA</div>
+        <div class="p-name">Notes Za Wizara + Past Papers</div>
+        <div class="p-desc">Masomo yote — semester 1 na 2. Package kamili bei moja ndogo.</div>
+        <div class="p-price"><sup>Tsh </sup>5,000<span>/=</span></div>
+        <div class="p-divider"></div>
+        <button class="p-wa-btn" onclick="orderPkg('Notes Za Wizara + Past Papers | Masomo Yote | Tsh 5,000')">💬 Agiza WhatsApp</button>
+      </div>
+      <div class="p-card">
+        <div class="p-tag tag-combo">SOMO MOJA</div>
+        <div class="p-name">Notes Za Wizara + Past Papers</div>
+        <div class="p-desc">Somo moja la chaguo lako — Notes kamili na Past Papers.</div>
+        <div class="p-price"><sup>Tsh </sup>3,000<span>/=</span></div>
+        <div class="p-divider"></div>
+        <button class="p-wa-btn" onclick="orderPkg('Notes Za Wizara + Past Papers | Somo Moja | Tsh 3,000')">💬 Agiza WhatsApp</button>
+      </div>
+      <div class="p-card">
+        <div class="p-tag tag-notes">NOTES TU</div>
+        <div class="p-name">Notes Za Wizara — Masomo Yote</div>
+        <div class="p-desc">Notes zote za wizara, masomo yote, semester zote mbili.</div>
+        <div class="p-price"><sup>Tsh </sup>3,000<span>/=</span></div>
+        <div class="p-divider"></div>
+        <button class="p-wa-btn" onclick="orderPkg('Notes Za Wizara Tu | Masomo Yote | Tsh 3,000')">💬 Agiza WhatsApp</button>
+      </div>
+      <div class="p-card">
+        <div class="p-tag tag-notes">NOTES — SOMO MOJA</div>
+        <div class="p-name">Notes Za Wizara — Somo Moja</div>
+        <div class="p-desc">Notes za somo moja unalohitaji sasa hivi.</div>
+        <div class="p-price"><sup>Tsh </sup>2,000<span>/=</span></div>
+        <div class="p-divider"></div>
+        <button class="p-wa-btn" onclick="orderPkg('Notes Za Wizara Tu | Somo Moja | Tsh 2,000')">💬 Agiza WhatsApp</button>
+      </div>
+      <div class="p-card">
+        <div class="p-tag tag-papers">PAST PAPERS</div>
+        <div class="p-name">Past Papers Tu — Masomo Yote</div>
+        <div class="p-desc">Mitihani yote ya nyuma, masomo yote kwa bei moja.</div>
+        <div class="p-price"><sup>Tsh </sup>4,000<span>/=</span></div>
+        <div class="p-divider"></div>
+        <button class="p-wa-btn" onclick="orderPkg('Past Papers Tu | Masomo Yote | Tsh 4,000')">💬 Agiza WhatsApp</button>
+      </div>
+      <div class="p-card">
+        <div class="p-tag tag-papers">PAST PAPERS — SOMO</div>
+        <div class="p-name">Past Papers Tu — Somo Moja</div>
+        <div class="p-desc">Past Papers za somo moja tu kwa bei ya chini.</div>
+        <div class="p-price"><sup>Tsh </sup>3,000<span>/=</span></div>
+        <div class="p-divider"></div>
+        <button class="p-wa-btn" onclick="orderPkg('Past Papers Tu | Somo Moja | Tsh 3,000')">💬 Agiza WhatsApp</button>
+      </div>
+      <div class="p-card">
+        <div class="p-tag tag-nacte">NACTE</div>
+        <div class="p-name">NACTE Past Papers — Masomo Yote</div>
+        <div class="p-desc">NACTE Past Papers kamili, masomo yote ya kozi yako.</div>
+        <div class="p-price"><sup>Tsh </sup>5,000<span>/=</span></div>
+        <div class="p-divider"></div>
+        <button class="p-wa-btn" onclick="orderPkg('NACTE Past Papers Tu | Masomo Yote | Tsh 5,000')">💬 Agiza WhatsApp</button>
+      </div>
+      <div class="p-card">
+        <div class="p-tag tag-special">SPECIAL GROUP</div>
+        <div class="p-name">NACTVET End of Sem 2 — Special Group</div>
+        <div class="p-desc">Materials maalum za NACTVET Semester 2 kwa kikundi maalum.</div>
+        <div class="p-price"><sup>Tsh </sup>5,000<span>/=</span></div>
+        <div class="p-divider"></div>
+        <button class="p-wa-btn" onclick="orderPkg('NACTVET End of Semester 2 Special Group | Tsh 5,000')">💬 Agiza WhatsApp</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="order-section" id="agiza">
+    <div class="order-inner">
+      <h2>📝 Request Materials Yako</h2>
+      <p>Jaza fomu — ujumbe wako utatengenezwa otomatiki na kutumwa WhatsApp.</p>
+      <div class="form-row">
+        <div class="form-group">
+          <label>🎓 Kozi Yako *</label>
+          <select id="sel-kozi" onchange="buildMsg()">
+            <option value="">— Chagua Kozi —</option>
+            <option>Clinical Medicine</option>
+            <option>Pharmaceutical Science</option>
+            <option>Nursing and Midwifery</option>
+            <option>Medical Laboratory</option>
+            <option>Radiology</option>
+            <option>Physiotherapy</option>
+            <option>Nyingine (Eleza Chini)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>📅 Mwaka wa Masomo *</label>
+          <select id="sel-mwaka" onchange="buildMsg()">
+            <option value="">— Chagua Mwaka —</option>
+            <option>Mwaka wa 1</option>
+            <option>Mwaka wa 2</option>
+            <option>Mwaka wa 3</option>
+            <option>Mwaka wa 4</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>📦 Package *</label>
+          <select id="sel-pkg" onchange="buildMsg()">
+            <option value="">— Chagua Package —</option>
+            <option>Notes Za Wizara + Past Papers | Masomo Yote | Tsh 5,000/=</option>
+            <option>Notes Za Wizara + Past Papers | Somo Moja | Tsh 3,000/=</option>
+            <option>Notes Za Wizara Tu | Masomo Yote | Tsh 3,000/=</option>
+            <option>Notes Za Wizara Tu | Somo Moja | Tsh 2,000/=</option>
+            <option>Past Papers Tu | Masomo Yote | Tsh 4,000/=</option>
+            <option>Past Papers Tu | Somo Moja | Tsh 3,000/=</option>
+            <option>NACTE Past Papers Tu | Masomo Yote | Tsh 5,000/=</option>
+            <option>NACTVET End of Semester 2 Special Group | Tsh 5,000/=</option>
+            <option>Material Mengine Muhimu | Tsh 2,000/=</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>✏️ Maelezo ya Ziada</label>
+          <input type="text" id="inp-extra" placeholder="Mf: Anatomy, Pharmacology..." oninput="buildMsg()">
+        </div>
+      </div>
+      <div style="font-size:.72rem;font-weight:600;color:#444;margin-bottom:.45rem">📖 Semester *</div>
+      <div class="sem-row">
+        <div class="sem-chip" id="chip-s1" onclick="toggleSem('s1')">Semester ya 1</div>
+        <div class="sem-chip" id="chip-s2" onclick="toggleSem('s2')">Semester ya 2</div>
+        <div class="sem-chip" id="chip-sb" onclick="toggleSem('sb')">Zote (1 na 2)</div>
+      </div>
+      <div style="font-size:.72rem;font-weight:600;color:#444;margin-bottom:.35rem">👁️ Ujumbe Wako</div>
+      <div class="msg-box" id="msgBox">Jaza fomu hapo juu — ujumbe wako utaonekana hapa...</div>
+      <a class="send-btn" id="sendBtn" href="#" target="_blank" rel="noopener" onclick="return checkForm()">💬 &nbsp;Najua Gharama — Tuma Ombi WhatsApp</a>
+    </div>
+  </div>
+
+  <footer>
+    <div class="fl"><span>MimiHapa</span> MEDICINE</div>
+    <div>✚ Tanzania's Home of Medicine</div>
+    <div style="margin-top:.4rem;color:#333">© 2025 MimiHapa MEDICINE. All rights reserved.</div>
+  </footer>
+</div>
+
+<a class="fwa" href="https://wa.me/255698697967?text=Habari!%20Ninahitaji%20msaada%20wa%20materials" target="_blank" rel="noopener">💬</a>
+
+<script>
+var TOTAL=10,cur=0,ctaShown=false;
+var track=document.getElementById('photo-track');
+var dots=document.querySelectorAll('.pdot');
+var ctaOverlay=document.getElementById('cta-overlay');
+var counter=document.getElementById('slide-counter');
+
+function goPhoto(n){
+  cur=((n%TOTAL)+TOTAL)%TOTAL;
+  track.style.transform='translateX(-'+(cur*100)+'%)';
+  dots.forEach(function(d,i){d.classList.toggle('on',i===cur);});
+  counter.textContent=(cur+1)+' / '+TOTAL;
+  if(cur>=5&&!ctaShown){ctaShown=true;ctaOverlay.classList.add('show');}
+}
+
+var autoTimer=setInterval(function(){goPhoto(cur+1);},2500);
+
+// touch swipe
+var touchSX=null,touchSY=null;
+var ss=document.getElementById('slideshow');
+ss.addEventListener('touchstart',function(e){touchSX=e.touches[0].clientX;touchSY=e.touches[0].clientY;},{passive:true});
+ss.addEventListener('touchend',function(e){
+  if(touchSX===null)return;
+  var dx=e.changedTouches[0].clientX-touchSX;
+  var dy=e.changedTouches[0].clientY-touchSY;
+  if(Math.abs(dx)>Math.abs(dy)&&Math.abs(dx)>35){
+    clearInterval(autoTimer);
+    goPhoto(dx<0?cur+1:cur-1);
+    autoTimer=setInterval(function(){goPhoto(cur+1);},2500);
+  }
+  touchSX=null;touchSY=null;
+},{passive:true});
+
+dots.forEach(function(d,i){d.addEventListener('click',function(){clearInterval(autoTimer);goPhoto(i);autoTimer=setInterval(function(){goPhoto(cur+1);},2500);});});
+
+function showContent(){
+  document.getElementById('slideshow').style.display='none';
+  document.getElementById('main-content').style.display='block';
+  clearInterval(autoTimer);
+  window.scrollTo(0,0);
+}
+
+var semState={s1:false,s2:false,sb:false};
+function toggleSem(k){
+  if(k==='sb'){semState={s1:false,s2:false,sb:!semState.sb};}
+  else{semState.sb=false;semState[k]=!semState[k];}
+  ['s1','s2','sb'].forEach(function(x){document.getElementById('chip-'+x).classList.toggle('sel',semState[x]);});
+  buildMsg();
+}
+function buildMsg(){
+  var kozi=document.getElementById('sel-kozi').value,mwaka=document.getElementById('sel-mwaka').value,pkg=document.getElementById('sel-pkg').value,extra=document.getElementById('inp-extra').value.trim();
+  var sem='';
+  if(semState.sb||(semState.s1&&semState.s2))sem='Semester 1 na 2 (Zote)';
+  else if(semState.s1)sem='Semester ya 1';
+  else if(semState.s2)sem='Semester ya 2';
+  var box=document.getElementById('msgBox'),btn=document.getElementById('sendBtn');
+  if(!kozi&&!mwaka&&!pkg){box.classList.remove('ready');box.textContent='Jaza fomu hapo juu — ujumbe wako utaonekana hapa...';btn.href='#';return;}
+  var lines=['Habari MimiHapa MEDICINE! ✚','','✅ *Najua Gharama Za Materials.*',''];
+  if(kozi)lines.push('📚 Ninahitaji Materials Ya Kozi Ya: *'+kozi+'*');
+  if(extra)lines.push('   ↳ '+extra);
+  if(mwaka)lines.push('📅 Mwaka Wa: *'+mwaka+'*');
+  if(sem)lines.push('📖 Semester Ya: *'+sem+'*');
+  if(pkg)lines.push('📦 Package: *'+pkg+'*');
+  lines.push('','Tafadhali nikusaidie. Asante! 🙏');
+  btn.href='https://wa.me/255698697967?text='+encodeURIComponent(lines.join('\n'));
+  box.classList.add('ready');
+  box.innerHTML=lines.map(function(l){if(!l)return'<br>';return l.replace(/\*(.*?)\*/g,'<strong>$1</strong>');}).join('<br>');
+}
+function checkForm(){
+  var k=document.getElementById('sel-kozi').value,m=document.getElementById('sel-mwaka').value,p=document.getElementById('sel-pkg').value,s=semState.s1||semState.s2||semState.sb;
+  if(!k||!m||!p||!s){alert('⚠️ Tafadhali jaza: Kozi, Mwaka, Package, na Semester!');return false;}
+  return true;
+}
+function orderPkg(pkg){
+  var txt='Habari MimiHapa MEDICINE! ✚\n\n✅ *Najua Gharama Za Materials.*\n\n📦 Package: *'+pkg+'*\n\nTafadhali nikusaidie. Asante! 🙏';
+  window.open('https://wa.me/255698697967?text='+encodeURIComponent(txt),'_blank');
+}
+
+var notifications=[
+  {name:'Hamisi Ally',amount:'Tsh 5,000/=',mat:'CMT 4 Notes + Past Papers',time:'dakika 2 zilizopita'},
+  {name:'Amina Juma',amount:'Tsh 3,000/=',mat:'Nursing Anatomy Notes',time:'dakika 5 zilizopita'},
+  {name:'Peter Mwangi',amount:'Tsh 5,000/=',mat:'NACTE Past Papers — Medical Lab',time:'dakika 8 zilizopita'},
+  {name:'Zuhura Suleiman',amount:'Tsh 2,000/=',mat:'Pharmacology Somo Moja',time:'dakika 11 zilizopita'},
+  {name:'Emmanuel Tarimo',amount:'Tsh 5,000/=',mat:'NACTVET Special Group Materials',time:'dakika 14 zilizopita'},
+  {name:'Neema Mollel',amount:'Tsh 3,000/=',mat:'Radiology Notes Yr 2',time:'dakika 17 zilizopita'},
+  {name:'Rashid Omar',amount:'Tsh 4,000/=',mat:'Physiotherapy Past Papers Zote',time:'dakika 20 zilizopita'},
+  {name:'Grace Mushi',amount:'Tsh 5,000/=',mat:'Clinical Medicine Yr 3 Combo',time:'dakika 23 zilizopita'},
+  {name:'Dickson Haule',amount:'Tsh 2,000/=',mat:'Microbiology Notes — Somo Moja',time:'dakika 26 zilizopita'},
+  {name:'Leah Kimaro',amount:'Tsh 5,000/=',mat:'Nursing Midwifery Full Package',time:'dakika 29 zilizopita'},
+  {name:'Salim Khamis',amount:'Tsh 3,000/=',mat:'Pharmaceutical Sci Somo Moja',time:'dakika 33 zilizopita'},
+  {name:'Beatrice Lyimo',amount:'Tsh 5,000/=',mat:'CMT 2 Notes + Past Papers Zote',time:'dakika 36 zilizopita'},
+];
+var nIdx=0;
+function showNotif(){
+  var n=notifications[nIdx%notifications.length];nIdx++;
+  var area=document.getElementById('notif-area');
+  var el=document.createElement('div');
+  el.className='notif-toast';
+  el.innerHTML='<div class="nt-icon">✅</div><div><div><span class="nt-name">'+n.name+'</span> amelipia <span class="nt-amount">'+n.amount+'</span></div><div style="color:#555;font-size:.66rem;margin-top:.1rem">'+n.mat+'</div><div class="nt-time">'+n.time+'</div></div>';
+  area.appendChild(el);
+  setTimeout(function(){el.classList.add('out');setTimeout(function(){if(el.parentNode)el.parentNode.removeChild(el);},350);},7000);
+}
+setTimeout(showNotif,2500);
+setInterval(showNotif,10000);
+</script>
