@@ -1,84 +1,252 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://www.mimihapaa.com/</loc>
-    <lastmod>2026-04-11</lastmod>
-    <priority>1.00</priority>
-  </url>
-  <url>
-    <loc>https://www.mimihapaa.com/notes-za-wizara/</loc>
-    <lastmod>2026-04-11</lastmod>
-    <priority>0.80</priority>
-  </url>
-  <url>
-    <loc>https://www.mimihapaa.com/modules/</loc>
-    <lastmod>2026-04-11</lastmod>
-    <priority>0.80</priority>
-  </url>
-  <url>
-    <loc>https://www.mimihapaa.com/past-papers/</loc>
-    <lastmod>2026-04-11</lastmod>
-    <priority>0.80</priority>
-  </url>
-  <url>
-    <loc>https://www.mimihapaa.com/nacte-past-papers/</loc>
-    <lastmod>2026-04-11</lastmod>
-    <priority>0.80</priority>
-  </url>
-  <url>
-    <loc>https://www.mimihapaa.com/bank-questions/</loc>
-    <lastmod>2026-04-11</lastmod>
-    <priority>0.80</priority>
-  </url>
-  <url>
-    <loc>https://www.mimihapaa.com/about/</loc>
-    <lastmod>2026-04-11</lastmod>
-    <priority>0.80</priority>
-  </url>
-  <url>
-    <loc>https://www.mimihapaa.com/contact/</loc>
-    <lastmod>2026-04-11</lastmod>
-    <priority>0.80</priority>
-  </url>
-  <url>
-    <loc>https://www.mimihapaa.com/notes-za-wizara/clinical-medicine.html</loc>
-    <lastmod>2026-04-11</lastmod>
-    <priority>0.80</priority>
-  </url>
-  <url>
-    <loc>https://www.mimihapaa.com/notes-za-wizara/pharmaceutical-science.html</loc>
-    <lastmod>2026-04-11</lastmod>
-    <priority>0.80</priority>
-  </url>
-  <url>
-    <loc>https://www.mimihapaa.com/privacy-policy/</loc>
-    <lastmod>2026-04-11</lastmod>
-    <priority>0.80</priority>
-  </url>
-  <url>
-    <loc>https://www.mimihapaa.com/terms/</loc>
-    <lastmod>2026-04-11</lastmod>
-    <priority>0.80</priority>
-  </url>
-  <url>
-    <loc>https://www.mimihapaa.com/disclaimer/</loc>
-    <lastmod>2026-04-11</lastmod>
-    <priority>0.80</priority>
-  </url>
-  <url>
-    <loc>https://www.mimihapaa.com/notes-za-wizara/cmt-level-4.html</loc>
-    <lastmod>2026-04-11</lastmod>
-    <priority>0.64</priority>
-  </url>
-  <url>
-    <loc>https://www.mimihapaa.com/notes-za-wizara/cmt-level-5.html</loc>
-    <lastmod>2026-04-11</lastmod>
-    <priority>0.64</priority>
-  </url>
-  <url>
-    <loc>https://www.mimihapaa.com/notes-za-wizara/cmt-level-6.html</loc>
-    <lastmod>2026-04-11</lastmod>
-    <priority>0.64</priority>
-    
-  </url>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
+
+
+<url>
+  <loc>https://www.mimihapaa.com/</loc>
+  <lastmod>2026-06-04T04:40:40+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+<url>
+  <loc>https://www.mimihapaa.com/notes-za-wizara/</loc>
+  <lastmod>2026-06-04T04:40:40+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.mimihapaa.com/modules/</loc>
+  <lastmod>2026-06-04T04:40:40+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.mimihapaa.com/past-papers/</loc>
+  <lastmod>2026-06-04T04:40:40+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.mimihapaa.com/nacte-past-papers/</loc>
+  <lastmod>2026-06-04T04:40:40+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.mimihapaa.com/bank-questions/</loc>
+  <lastmod>2026-06-04T04:40:40+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.mimihapaa.com/about/</loc>
+  <lastmod>2026-06-04T04:40:40+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.mimihapaa.com/contact/</loc>
+  <lastmod>2026-06-04T04:40:40+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.mimihapaa.com/clinical-medicine-notes</loc>
+  <lastmod>2026-06-04T04:40:40+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.mimihapaa.com/pharmacy-notes</loc>
+  <lastmod>2026-06-04T04:40:40+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.mimihapaa.com/nursing-notes</loc>
+  <lastmod>2026-06-04T04:40:40+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.mimihapaa.com/medical-laboratory-notes</loc>
+  <lastmod>2026-06-04T04:40:40+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.mimihapaa.com/diagnostic-radiology-notes</loc>
+  <lastmod>2026-06-04T04:40:40+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.mimihapaa.com/clinical-optomentry-notes</loc>
+  <lastmod>2026-06-04T04:40:40+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.mimihapaa.com/clinical-dentistry-notes</loc>
+  <lastmod>2026-06-04T04:40:40+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.mimihapaa.com/privacy-policy/</loc>
+  <lastmod>2026-06-04T04:40:40+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.mimihapaa.com/terms/</loc>
+  <lastmod>2026-06-04T04:40:40+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.mimihapaa.com/disclaimer/</loc>
+  <lastmod>2026-06-04T04:40:40+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.mimihapaa.com/notes-za-wizara/cmt-level-5</loc>
+  <lastmod>2026-06-04T04:40:40+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.mimihapaa.com/notes-za-wizara/cmt-level-4</loc>
+  <lastmod>2026-06-04T04:40:40+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.mimihapaa.com/notes-za-wizara/cmt-level-6</loc>
+  <lastmod>2026-06-04T04:40:40+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.mimihapaa.com/notes-za-wizara/pst-level-4</loc>
+  <lastmod>2026-06-04T04:40:40+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.mimihapaa.com/notes-za-wizara/pst-level-5</loc>
+  <lastmod>2026-06-04T04:40:40+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.mimihapaa.com/notes-za-wizara/pst-level-6</loc>
+  <lastmod>2026-06-04T04:40:40+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.mimihapaa.com/notes-za-wizara/nmt-level-4</loc>
+  <lastmod>2026-06-04T04:40:40+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.mimihapaa.com/notes-za-wizara/nmt-level-5</loc>
+  <lastmod>2026-06-04T04:40:40+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.mimihapaa.com/notes-za-wizara/nmt-level-6</loc>
+  <lastmod>2026-06-04T04:40:40+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.mimihapaa.com/notes-za-wizara/mlt-level-4</loc>
+  <lastmod>2026-06-04T04:40:40+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.mimihapaa.com/notes-za-wizara/mlt-level-5</loc>
+  <lastmod>2026-06-04T04:40:40+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.mimihapaa.com/notes-za-wizara/mlt-level-6</loc>
+  <lastmod>2026-06-04T04:40:40+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.mimihapaa.com/notes-za-wizara/cdt-level-4</loc>
+  <lastmod>2026-06-04T04:40:40+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.mimihapaa.com/notes-za-wizara/cdt-level-5</loc>
+  <lastmod>2026-06-04T04:40:40+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.mimihapaa.com/notes-za-wizara/cdt-level-6</loc>
+  <lastmod>2026-06-04T04:40:40+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.mimihapaa.com/notes-za-wizara/cot-level-4</loc>
+  <lastmod>2026-06-04T04:40:40+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.mimihapaa.com/notes-za-wizara/cot-level-5</loc>
+  <lastmod>2026-06-04T04:40:40+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.mimihapaa.com/notes-za-wizara/cot-level-6</loc>
+  <lastmod>2026-06-04T04:40:40+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.mimihapaa.com/notes-za-wizara/drt-level-4</loc>
+  <lastmod>2026-06-04T04:40:40+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.mimihapaa.com/notes-za-wizara/drt-level-5</loc>
+  <lastmod>2026-06-04T04:40:40+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.mimihapaa.com/notes-za-wizara/drt-level-6</loc>
+  <lastmod>2026-06-04T04:40:40+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.mimihapaa.com/dl/cmt5</loc>
+  <lastmod>2026-06-04T04:40:40+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://www.mimihapaa.com/dl/cmt4</loc>
+  <lastmod>2026-06-04T04:40:40+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://www.mimihapaa.com/dl/cmt6</loc>
+  <lastmod>2026-06-04T04:40:40+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://www.mimihapaa.com/dl/pst4</loc>
+  <lastmod>2026-06-04T04:40:40+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://www.mimihapaa.com/dl/pst5</loc>
+  <lastmod>2026-06-04T04:40:40+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://www.mimihapaa.com/dl/pst6</loc>
+  <lastmod>2026-06-04T04:40:40+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://www.mimihapaa.com/dl/nmt4</loc>
+  <lastmod>2026-06-04T04:40:40+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://www.mimihapaa.com/dl/mlt4</loc>
+  <lastmod>2026-06-04T04:40:40+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://www.mimihapaa.com/malipo</loc>
+  <lastmod>2026-06-04T04:40:40+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+
+
 </urlset>
